@@ -67,19 +67,25 @@ Cell** Grid::get_mesh() const{
 void Grid::create_cell(){
 
     int num_cell = 0;
+    do{
     cout << "Cuantas celulas vivas quiere empezar? ";
     cin >> num_cell;
-    //if (num_cell > get_columns() - 2 * get_rows() - 2)
-        //cout << "El numero de celulas introducidas supera la capacidad de la rejilla" << endl;
+    if (num_cell > (get_columns() - 2) * (get_rows() - 2))
+        cout << "El numero de celulas introducidas supera la capacidad de la rejilla" << endl;
+    }while(num_cell > (get_columns() - 2) * (get_rows() - 2));
+
     cout << "Indique las coordenadas (i , j) de la celula" << endl;
     State state;
     state.set_state(1);
     for(;num_cell > 0; num_cell--){
-        //while(pos_i > get_rows() || pos_j > get_columns()){
-            int pos_i = 0, pos_j = 0;
-            cout << "[" << num_cell << "]: ";
-            cin >> pos_i >> pos_j;
-        //}    
+        int pos_i = 0, pos_j = 0;
+        do{
+        cout << "[" << num_cell << "]: ";
+        cin >> pos_i >> pos_j;
+        if(pos_i > (get_rows() -2) || pos_j > (get_columns() - 2))
+            cout << "La coordenada introducida esta fuera del rango de la rejilla" << endl;
+        }while(pos_i > (get_rows() -2) || pos_j > (get_columns() - 2));
+               
         mesh_[pos_i * get_columns() + pos_j]->set_State(state);
 
     }
