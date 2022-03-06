@@ -5,20 +5,22 @@ using namespace std;
 class State{
 
 public:
-
-inline int get_state();
-inline void set_state(int state);
+    State(){}
+    
+    inline int get_state() const;
+    
+    inline void set_state(int state);
 
 private:
 
-int state_ = 0; // 0 es muerta, 1 es viva
+    int state_ = 0; // 0 es muerta, 1 es viva
 
 
 };
 
 
 
-int State::get_state()
+int State::get_state() const 
 {
 
 return state_;

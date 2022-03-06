@@ -1,26 +1,23 @@
-# Macros
+CXX		  := g++
+CXX_FLAGS := -ggdb
 
-MAIN = main/
-MAIN_FILE = $(MAIN)main.cc
-SRC = src/
-SRC_FILES = $(SRC)cell.cc $(SRC)grid.cc
-OUT = bin/
-OUT_FILE = $(OUT)juego-vida
-IN = input/
-IN_FILE = $(IN)default.txt
+BIN		:= bin
+SRC		:= src
+INCLUDE	:= include
+LIB		:= lib
+
+LIBRARIES	:=
+EXECUTABLE	:= main
 
 
-# Reglas explícitas
+all: $(BIN)/$(EXECUTABLE)
 
-default:
-	g++ $(MAIN_FILE) $(SRC_FILES) -o $(OUT_FILE)
+run: clean all
+	clear
+	./$(BIN)/$(EXECUTABLE)
 
-manual:
-	$(OUT_FILE)
+$(BIN)/$(EXECUTABLE): $(SRC)/*.cc
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
 
-file:
-	$(OUT_FILE) $(IN_FILE)
-
-run: default manual
-
-run-file: default file
+clean:
+	-rm $(BIN)/*

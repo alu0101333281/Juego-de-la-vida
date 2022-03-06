@@ -21,7 +21,7 @@ return state_;
 
 void Cell::set_State(State& estado){
 
-estado = state_;
+state_ = estado;
 
 }
 
@@ -63,10 +63,10 @@ void Cell::updateState(){
     }
 
     else if(state_.get_state() == 1){
-        if(countneighbors_ != 2 || countneighbors_ != 3)
-            state_.set_state(0);
-        else
+        if(countneighbors_ == 2 || countneighbors_ == 3)
             state_.set_state(1);
+        else
+            state_.set_state(0);
     }
 
 }
@@ -79,17 +79,18 @@ int Cell::neighbors(const Grid& board){
     for(int i = get_position().first - 1; i <= get_position().first + 1; i++)
 		for(int j = get_position().second - 1; j <= get_position().second + 1; j++)
 			if(i != get_position().first || j != get_position().second)
-				if(board.get_mesh()[i * board.get_columns() + j]->get_State().get_state() == 1);
-				counter++;	
+				if(board.get_mesh()[i * board.get_columns() + j]->state_.get_state() == 1)
+				    counter++;	
 
-    return counter;
+    countneighbors_ = counter;
+    return countneighbors_;
 
 }
 
 
 std::ostream& operator<<(std::ostream& out, const Cell& cell){
 
-    if(cell.get_State().get_state()== 1)
+    if(cell.get_State().get_state() == 1)
         out << 'X';
     else
         out << ' ';

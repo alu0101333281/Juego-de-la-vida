@@ -14,22 +14,34 @@ class Cell{
 
 public:
 
-void updateState();
-int neighbors(const Grid&);
-friend std::ostream& operator<<(std::ostream&, const Cell&);
-State get_State() const;
-void set_State(State&);
-void set_position(std::pair<int, int> pos);
-void set_position(int, int);
-std::pair<int, int> get_position();
-Cell(int, int); //Constructor
-Cell(){} //constructor por defecto, inicializado
-~Cell(){} //destructor, inicializado
+    void updateState();
+
+    int neighbors(const Grid&);
+
+    friend std::ostream& operator<<(std::ostream&, const Cell&);
+
+    State get_State() const;
+
+    void set_State(State&);
+
+    void set_position(std::pair<int, int> pos);
+
+    void set_position(int, int);
+
+    std::pair<int, int> get_position();
+
+    Cell(int, int); //Constructor
+
+    Cell(){} //constructor por defecto, inicializado
+
+    ~Cell(){} //destructor, inicializado
 
 private:
 
-State state_;
-std::pair <int, int > pos_;
-int countneighbors_;
+    State state_;
+
+    std::pair <int, int > pos_;
+
+    int countneighbors_;
 
 };
